@@ -4,26 +4,27 @@ var makeQueue = function(){
   // Use an object with numeric keys to store values
   var storage = {};
   var size = 0;
+  var front = 0;
+
   // Implement the methods below
 
   someInstance.enqueue = function(value){
-    storage[size] = value;
+    storage[size + front] = value;
     size++;
   };
 
   someInstance.dequeue = function(){
-    var result = storage['0'];
-    var counter = 0;
-    delete storage['0'];
-
-    for(var key in storage){
-      var newKey = parseInt(key) - 1;
-      storage[newKey] = storage[key];
-      counter++;
+    if(size>0){
+      size --;
     }
-    size = counter;
-    return result;
 
+    var result = storage[front];
+
+    delete storage[front];
+
+    front++;
+
+    return result;
   };
 
   someInstance.size = function(){
