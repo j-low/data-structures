@@ -26,3 +26,5 @@ var makeStack = function(){
 
   return someInstance;
 };
+
+obj[parseInt[(key+1)]] = value;
