@@ -9,22 +9,23 @@ var makeTree = function(value){
 var treeMethods = {};
 
 treeMethods.addChild = function(value){
+    this.children.push(makeTree(value));
 
-  this.children.push(makeTree(value));
 };
 
-treeMethods.contains = function(target){
+treeMethods.contains = function(target, result){
+  result = result || false;
   if(this.value === target) {
-    return true;
-  } else {
-    if(this.children) {
-      for(var child in this.children) {
-        child.contains(target);
+    result =  true;
+  }
+  else{
+    if(this.children.length>0){
+      for(var child = 0; child < this.children.length; child++) {
+        result =  this.children[child].contains(target, result);
       }
-    } else {
-      return false;
     }
   }
+  return result;
 };
 
 
